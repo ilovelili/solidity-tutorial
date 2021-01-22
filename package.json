@@ -1,25 +1,40 @@
 {
-  "name": "pet-shop",
+  "name": "petshop",
   "version": "1.0.0",
-  "description": "",
-  "main": "truffle.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "dev": "lite-server",
-    "deploy:local": "truffle deploy --network local --reset",
-    "deploy:testnet": "truffle deploy --network testnet --reset",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "description": "petshop tutorial",
   "license": "ISC",
-  "devDependencies": {
-    "@truffle/hdwallet-provider": "^1.2.0",
-    "dotenv": "^8.2.0",
-    "lite-server": "^2.3.0"
+  "scripts": {
+    "generate-types": "typechain --target=ethers-v5 'build/contracts/*.json'",
+    "prepare": "tsc && cp truffle-config.js ./dest",
+    "deploy:local": "truffle migrate --reset --network local",
+    "deploy:testnet": "truffle migrate --reset --network testnet",
+    "deploy:testnet:dry-run": "truffle migrate --reset --network testnet --dry-run",
+    "test": "jest --detectOpenHandles",
+    "docker:build": "docker build -t ilovelili/pershop .",
+    "docker:build:no-cache": "docker build --no-cache -t ilovelili/pershop .",
+    "docker:run": "docker run -d ilovelili/pershop",
+    "start": "ts-node src/petshop.ts"
   },
   "dependencies": {
-    "ethers": "^5.0.23"
+    "@babel/preset-typescript": "^7.10.4",
+    "@truffle/hdwallet-provider": "^1.0.35",
+    "chalk": "^4.1.0",
+    "dotenv": "^8.2.0",
+    "ethers": "^5.0.13",
+    "ganache-core": "^2.11.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@typechain/ethers-v5": "^1.0.0",
+    "@types/jest": "^26.0.9",
+    "@types/node": "^14.0.27",
+    "babel-jest": "^26.2.2",
+    "ganache-cli": "^6.12.0",
+    "jest": "^26.1.0",
+    "prettier": "^2.0.5",
+    "ts-node": "^8.10.2",
+    "typechain": "^2.0.0",
+    "typescript": "^3.9.6"
   }
 }

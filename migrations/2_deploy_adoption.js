@@ -1,5 +1,6 @@
-var Adoption = artifacts.require("./Adoption.sol");
+const Adoption = artifacts.require("Adoption.sol");
 
-module.exports = function (deployer) {
-	deployer.deploy(Adoption);
+module.exports = async function (deployer, network) {
+  console.log(`deploying adoption to ${network}`);
+  await deployer.deploy(Adoption);
 };

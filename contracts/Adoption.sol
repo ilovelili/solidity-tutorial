@@ -1,20 +1,17 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.7.5;
+pragma solidity ^0.7.0;
 
 contract Adoption {
-    address[21] public adopters;
+    uint256 constant size = 16;
+    address[size] public adopters;
 
-    // perId < 20 => valid
-    function adopt(uint256 _petId) public returns (uint256) {
-        // if (_petId < 0 || _petId > 20) {
-        //     revert("invalid pet id");
-        // }
-        require(_petId >= 0 && _petId <= 20, "invalid pet id");
-        adopters[_petId] = msg.sender; // address
-        return _petId;
+    function adopt(uint256 petId) public returns (uint256) {
+        require(petId >= 0 && petId <= size - 1, "invalid pet id");
+        adopters[petId] = msg.sender;
+        return petId;
     }
 
-    function getAdopters() public view returns (address[21] memory) {
+    function getAdopters() public view returns (address[size] memory) {
         return adopters;
     }
 }
